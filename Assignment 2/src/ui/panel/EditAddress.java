@@ -1,9 +1,16 @@
 package ui.panel;
 
+import model.PersonDirectory;
+
 public class EditAddress extends javax.swing.JPanel {
 
-    public EditAddress() {
+    private javax.swing.JPanel container;
+    private PersonDirectory personDirectory;
+
+    public EditAddress(javax.swing.JPanel container, PersonDirectory personDirectory) {
         initComponents();
+        this.container = container;
+        this.personDirectory = personDirectory;
     }
 
     @SuppressWarnings("unchecked")

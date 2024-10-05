@@ -1,6 +1,12 @@
 package ui;
 
+import model.Address;
+import model.Person;
+import model.PersonDirectory;
+
 public class MainJFrame extends javax.swing.JFrame {
+
+    private PersonDirectory personDirectory;
 
     public MainJFrame() {
         initComponents();
@@ -127,6 +133,14 @@ public class MainJFrame extends javax.swing.JFrame {
                 new MainJFrame().setVisible(true);
             }
         });
+    }
+
+    private void generateDemoData() {
+        personDirectory.addPerson(new Person("Potter", "Harry", "88888888", 17, new Address("4 Privet Drive", "Cupboard", "Little Whinging", "Surrey", "01234", "1234567890"), new Address("Hogwarts", "Gryffindors", "London", "UK", "99999", "9876543210")));
+        personDirectory.addPerson(new Person("Northeastern", "Husky", "95405751", 120, new Address("360 Huntington Ave", "202", "Boston", "Massachusetts", "02115", "6173732310"), new Address("360 Huntington Ave", "0", "Boston", "Massachusetts", "02115", "6173732000")));
+        personDirectory.addPerson(new Person("Trump", "Donald", "42863723", 74, new Address("725 5th Ave", "Trump Tower", "New York", "NY", "10022", "2128322000"), new Address("1600 Pennsylvania Ave NW", "Oval Office", "Washington", "DC", "20500", "2024561111")));
+        personDirectory.addPerson(new Person("Murasame", "Arichi", "12345678", 500, new Address("0721 Anime St", "Hoori", "Tokyo", "Japan", "23333", "1145140721"), new Address("2 Jigen Ave", "", "Tokyo", "Japan", "66666", "5141919810")));
+        personDirectory.addPerson(new Person("Sample", "Person", "00000000", 18, new Address("1 Home St", "Apt 2", "City", "State", "33333", "4444444444"), new Address("5 Work Ave", "Room 6", "City", "State", "77777", "8888888888")));
     }
                 
     private javax.swing.JButton btnAdd;
