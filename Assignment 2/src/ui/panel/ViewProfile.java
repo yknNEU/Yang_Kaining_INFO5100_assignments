@@ -1,16 +1,16 @@
 package ui.panel;
 
-import model.PersonDirectory;
+import model.Person;
 
 public class ViewProfile extends javax.swing.JPanel {
 
     private javax.swing.JPanel container;
-    private PersonDirectory personDirectory;
+    private Person person;
 
-    public ViewProfile(PersonDirectory personDirectory, javax.swing.JPanel container) {
+    public ViewProfile(javax.swing.JPanel container, Person person) {
         initComponents();
-        this.personDirectory = personDirectory;
         this.container = container;
+        this.person = person;
     }
 
     @SuppressWarnings("unchecked")

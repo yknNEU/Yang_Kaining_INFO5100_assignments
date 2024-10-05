@@ -3,13 +3,22 @@ package ui;
 import model.Address;
 import model.Person;
 import model.PersonDirectory;
+import ui.panel.*;
 
 public class MainJFrame extends javax.swing.JFrame {
 
     private PersonDirectory personDirectory;
 
     public MainJFrame() {
+        personDirectory = new PersonDirectory();
         initComponents();
+        // ------------------------------------- //
+        generateDemoData();
+        // ------------------------------------- //
+        ProfileList profileList = new ProfileList(rightPanel, personDirectory);
+        rightPanel.add("ProfileList", profileList);
+        java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,14 +62,14 @@ public class MainJFrame extends javax.swing.JFrame {
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnList, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtView))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtView)
+                    .addComponent(btnView, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +94,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(splitPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,11 +105,19 @@ public class MainJFrame extends javax.swing.JFrame {
     }                 
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        
+        rightPanel.removeAll();
+        CreateProfile createProfile = new CreateProfile(rightPanel, personDirectory);
+        rightPanel.add("CreateProfile", createProfile);
+        java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }                                      
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        rightPanel.removeAll();
+        ProfileList profileList = new ProfileList(rightPanel, personDirectory);
+        rightPanel.add("ProfileList", profileList);
+        java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }                                       
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {                                        

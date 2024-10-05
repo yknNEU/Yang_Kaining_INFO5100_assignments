@@ -7,10 +7,10 @@ public class ProfileList extends javax.swing.JPanel {
     private javax.swing.JPanel container;
     private PersonDirectory personDirectory;
 
-    public ProfileList(PersonDirectory personDirectory, javax.swing.JPanel container) {
+    public ProfileList(javax.swing.JPanel container, PersonDirectory personDirectory) {
         initComponents();
-        this.personDirectory = personDirectory;
         this.container = container;
+        this.personDirectory = personDirectory;
     }
 
     @SuppressWarnings("unchecked")
@@ -27,10 +27,7 @@ public class ProfileList extends javax.swing.JPanel {
 
         tblProfile.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "First Name", "Last Name", "Home City", "Home Phone", "Work City", "Work Phone"
@@ -46,7 +43,7 @@ public class ProfileList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblProfile);
 
-        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); 
+        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         lblTitle.setText("Profile List");
 
         btnView.setText("View Details");
