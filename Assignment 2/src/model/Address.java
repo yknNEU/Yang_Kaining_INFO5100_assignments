@@ -75,6 +75,10 @@ public class Address {
         this.phone = phone;
     }
 
+    public boolean isFinished() {
+        return !street.isBlank() && !city.isBlank() && !state.isBlank() && !zip.isBlank() && !phone.isBlank();
+    }
+
     @Override
     public String toString() {
         return street + " " + unit + "\n" + city + ", " + state + " " + zip + "\n" + phone;

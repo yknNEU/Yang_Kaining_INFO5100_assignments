@@ -162,12 +162,62 @@ public class EditAddress extends javax.swing.JPanel {
     }                        
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        container.remove(this);
+        java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+        layout.previous(container);
     }                                       
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
-    }                                       
+        String street = txtStreet.getText();
+        String unit = txtNumber.getText();
+        String city = txtCity.getText();
+        String state = txtState.getText();
+        String zip = txtZip.getText();
+        String phone = txtPhone.getText();
+
+        if (street.isBlank() || city.isBlank() || state.isBlank() || zip.isBlank() || phone.isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!zip.matches("\\d{5}")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Zip code must be a 5-digit number.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!phone.matches("\\d+")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Phone number must be numbers.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        address.setStreet(street);
+        address.setUnit(unit);
+        address.setCity(city);
+        address.setState(state);
+        address.setZip(zip);
+        address.setPhone(phone);
+        javax.swing.JOptionPane.showMessageDialog(this, "Address saved successfully.", "Information", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        refreshAddress();
+    }
+    
+    private void refreshAddress() {
+        String[] a = address.toString().split("\n");
+        lblAddress1.setText("- " + a[0]);
+        lblAddress2.setText("- " + a[1]);
+        lblAddress3.setText("- " + a[2]);
+
+        java.awt.Component[] panelStack = container.getComponents();
+        javax.swing.JPanel lastPanel = (javax.swing.JPanel) panelStack[panelStack.length - 2];
+
+        if (lastPanel instanceof CreateProfile) {
+            CreateProfile profilePanel = (CreateProfile) lastPanel;
+            profilePanel.refreshAddress();
+        }
+        if (lastPanel instanceof ViewProfile) {
+            ViewProfile profilePanel = (ViewProfile) lastPanel;
+            profilePanel.refreshAddress();
+        }
+    }
 
                  
     private javax.swing.JButton btnBack;

@@ -218,7 +218,18 @@ public class ViewProfile extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
         
-    }                                         
+    }
+    
+    public void refreshAddress() {
+        String[] homeAddress = person.getHomeAddress().toString().split("\n");
+        String[] workAddress = person.getWorkAddress().toString().split("\n");
+        lblHome1.setText("- " + homeAddress[0]);
+        lblHome2.setText("- " + homeAddress[1]);
+        lblHome3.setText("- " + homeAddress[2]);
+        lblWork1.setText("- " + workAddress[0]);
+        lblWork2.setText("- " + workAddress[1]);
+        lblWork3.setText("- " + workAddress[2]);
+    }
                  
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnHome;

@@ -1,16 +1,19 @@
 package ui.panel;
 
+import model.Person;
 import model.PersonDirectory;
 
 public class CreateProfile extends javax.swing.JPanel {
 
     private javax.swing.JPanel container;
     private PersonDirectory personDirectory;
+    private Person person;
 
     public CreateProfile(javax.swing.JPanel container, PersonDirectory personDirectory) {
-        initComponents();
         this.container = container;
         this.personDirectory = personDirectory;
+        this.person = new Person();
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -176,16 +179,84 @@ public class CreateProfile extends javax.swing.JPanel {
     }                   
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        EditAddress editAddress = new EditAddress(container, person.getHomeAddress());
+        container.add("EditAddress", editAddress);
+        java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+        layout.next(container);
     }                                       
 
     private void btnWorkActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        EditAddress editAddress = new EditAddress(container, person.getWorkAddress());
+        container.add("EditAddress", editAddress);
+        java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+        layout.next(container);
     }                                       
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        
-    }                                         
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String socialSecurityNumber = txtNumber.getText();
+        String ageString = txtAge.getText();
+
+        if (firstName.isBlank() || lastName.isBlank() || socialSecurityNumber.isBlank() || ageString.isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!socialSecurityNumber.matches("\\d+")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Social Security Number must be numbers.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int age = 0;
+        try {
+            age = Integer.parseInt(ageString);
+            if (age < 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Age must be a positive number.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Age must be a positive number.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!person.getHomeAddress().isFinished() || !person.getWorkAddress().isFinished()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please complete the address information.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setSocialSecurityNumber(socialSecurityNumber);
+        person.setAge(age);
+        personDirectory.addPerson(person);
+        javax.swing.JOptionPane.showMessageDialog(this, "Profile created successfully.", "Information", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtNumber.setText("");
+        txtAge.setText("");
+        person = new Person();
+        refreshAddress();
+    }
+    
+    public void refreshAddress() {
+        String[] homeAddress = person.getHomeAddress().toString().split("\n");
+        String[] workAddress = person.getWorkAddress().toString().split("\n");
+        if (!person.getHomeAddress().isFinished()) {
+            homeAddress = new String[]{"", "", ""};
+        }
+        if (!person.getWorkAddress().isFinished()) {
+            workAddress = new String[]{"", "", ""};
+        }
+
+        lblHome1.setText("- " + homeAddress[0]);
+        lblHome2.setText("- " + homeAddress[1]);
+        lblHome3.setText("- " + homeAddress[2]);
+        lblWork1.setText("- " + workAddress[0]);
+        lblWork2.setText("- " + workAddress[1]);
+        lblWork3.setText("- " + workAddress[2]);
+    }
 
          
     private javax.swing.JButton btnCreate;

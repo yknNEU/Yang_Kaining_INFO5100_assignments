@@ -1,5 +1,6 @@
 package ui.panel;
 
+import model.Person;
 import model.PersonDirectory;
 
 public class ProfileList extends javax.swing.JPanel {
@@ -8,9 +9,10 @@ public class ProfileList extends javax.swing.JPanel {
     private PersonDirectory personDirectory;
 
     public ProfileList(javax.swing.JPanel container, PersonDirectory personDirectory) {
-        initComponents();
         this.container = container;
         this.personDirectory = personDirectory;
+        initComponents();
+        populateTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -123,7 +125,23 @@ public class ProfileList extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
         
-    }                                         
+    }
+    
+    public void populateTable() {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblProfile.getModel();
+        model.setRowCount(0);
+
+        for (Person person : personDirectory.getPersonList()) {
+            Object[] row = new Object[6];
+            row[0] = person;
+            row[1] = person.getLastName();
+            row[2] = person.getHomeAddress().getCity();
+            row[3] = person.getHomeAddress().getPhone();
+            row[4] = person.getWorkAddress().getCity();
+            row[5] = person.getWorkAddress().getPhone();
+            model.addRow(row);
+        }
+    }
               
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
