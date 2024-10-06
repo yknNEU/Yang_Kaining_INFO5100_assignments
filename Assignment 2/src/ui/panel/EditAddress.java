@@ -11,6 +11,7 @@ public class EditAddress extends javax.swing.JPanel {
         initComponents();
         this.container = container;
         this.address = address;
+        populateAddress();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +38,7 @@ public class EditAddress extends javax.swing.JPanel {
         lblAddress3 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
-        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); 
+        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
         lblTitle.setText("Edit Address");
 
         lblStreet.setText("Street Address");
@@ -112,7 +113,7 @@ public class EditAddress extends javax.swing.JPanel {
                                         .addComponent(lblState)
                                         .addComponent(txtState)
                                         .addComponent(lblAddress)))))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,11 +203,18 @@ public class EditAddress extends javax.swing.JPanel {
     
     private void refreshAddress() {
         String[] a = address.toString().split("\n");
+        if (!address.isFinished()) {
+            a = new String[]{"", "", ""};
+        }
+
         lblAddress1.setText("- " + a[0]);
         lblAddress2.setText("- " + a[1]);
         lblAddress3.setText("- " + a[2]);
 
         java.awt.Component[] panelStack = container.getComponents();
+        if (panelStack.length < 2) {
+            return;
+        }
         javax.swing.JPanel lastPanel = (javax.swing.JPanel) panelStack[panelStack.length - 2];
 
         if (lastPanel instanceof CreateProfile) {
@@ -217,6 +225,20 @@ public class EditAddress extends javax.swing.JPanel {
             ViewProfile profilePanel = (ViewProfile) lastPanel;
             profilePanel.refreshAddress();
         }
+        if (lastPanel instanceof ProfileList) {
+            ProfileList profileList = (ProfileList) lastPanel;
+            profileList.populateTable();
+        }
+    }
+
+    private void populateAddress() {
+        txtStreet.setText(address.getStreet());
+        txtNumber.setText(address.getUnit());
+        txtCity.setText(address.getCity());
+        txtState.setText(address.getState());
+        txtZip.setText(address.getZip());
+        txtPhone.setText(address.getPhone());
+        refreshAddress();
     }
 
                  

@@ -121,7 +121,20 @@ public class MainJFrame extends javax.swing.JFrame {
     }                                       
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        if (txtView.getText().isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please type the first name to view.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Person person = personDirectory.getPerson(txtView.getText());
+        if (person == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Person not exist.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } else {
+            ViewProfile viewProfile = new ViewProfile(rightPanel, person);
+            rightPanel.add("ViewProfile", viewProfile);
+            java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
+            layout.next(rightPanel);
+        }
     }                                       
 
 

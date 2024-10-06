@@ -116,15 +116,50 @@ public class ProfileList extends javax.swing.JPanel {
     }                  
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        int selectedRow = tblProfile.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            Person person = (Person) tblProfile.getValueAt(selectedRow, 0);
+            ViewProfile viewProfile = new ViewProfile(container, person);
+            container.add("ViewProfile", viewProfile);
+            java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+            layout.next(container);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a person from the list.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
     }                                       
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        
+        int selectedRow = tblProfile.getSelectedRow();
+        if (selectedRow >= 0) {
+            int dialogButton = javax.swing.JOptionPane.YES_NO_OPTION;
+            int dialogResult = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to delete the selected person?", "Warning", dialogButton);
+            if (dialogResult == javax.swing.JOptionPane.YES_OPTION) {
+                Person person = (Person) tblProfile.getValueAt(selectedRow, 0);
+                personDirectory.removePerson(person);
+                populateTable();
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a person from the list.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
     }                                         
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        
+        if (txtSearch.getText().isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please type the name or the street address to view.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String info = txtSearch.getText();
+        Person person = personDirectory.searchPerson(info);
+        if (person == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Person not found. Please check the information and try again.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } else {
+            ViewProfile viewProfile = new ViewProfile(container, person);
+            container.add("ViewProfile", viewProfile);
+            java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+            layout.next(container);
+        }
     }
     
     public void populateTable() {

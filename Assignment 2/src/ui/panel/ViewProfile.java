@@ -11,6 +11,8 @@ public class ViewProfile extends javax.swing.JPanel {
         initComponents();
         this.container = container;
         this.person = person;
+        setViewMode();
+        populateProfile();
     }
 
     @SuppressWarnings("unchecked")
@@ -201,34 +203,135 @@ public class ViewProfile extends javax.swing.JPanel {
     }                   
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        container.remove(this);
+
+        java.awt.Component[] panelStack = container.getComponents();
+        if (panelStack.length >= 1) {
+            javax.swing.JPanel lastPanel = (javax.swing.JPanel) panelStack[panelStack.length - 1];
+            if (lastPanel instanceof CreateProfile) {
+                CreateProfile profilePanel = (CreateProfile) lastPanel;
+                profilePanel.refreshAddress();
+            }
+            if (lastPanel instanceof ViewProfile) {
+                ViewProfile profilePanel = (ViewProfile) lastPanel;
+                profilePanel.refreshAddress();
+            }
+            if (lastPanel instanceof ProfileList) {
+                ProfileList profileList = (ProfileList) lastPanel;
+                profileList.populateTable();
+            }
+        }
+
+        java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+        layout.previous(container);
     }                                       
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        EditAddress editAddress = new EditAddress(container, person.getHomeAddress());
+        container.add("EditAddress", editAddress);
+        java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+        layout.next(container);
     }                                       
 
     private void btnWorkActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        EditAddress editAddress = new EditAddress(container, person.getWorkAddress());
+        container.add("EditAddress", editAddress);
+        java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
+        layout.next(container);
     }                                       
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String socialSecurityNumber = txtNumber.getText();
+        String ageString = txtAge.getText();
+
+        if (firstName.isBlank() || lastName.isBlank() || socialSecurityNumber.isBlank() || ageString.isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!socialSecurityNumber.matches("\\d+")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Social Security Number must be numbers.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int age = 0;
+        try {
+            age = Integer.parseInt(ageString);
+            if (age < 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Age must be a positive number.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Age must be a positive number.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!person.getHomeAddress().isFinished() || !person.getWorkAddress().isFinished()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please complete the address information.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setSocialSecurityNumber(socialSecurityNumber);
+        person.setAge(age);
+        javax.swing.JOptionPane.showMessageDialog(this, "Profile updated successfully.", "Information", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        refreshAddress();
+        setViewMode();
     }                                       
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        
+        setEditMode();
+    }
+
+    private void setViewMode() {
+        txtFirstName.setEditable(false);
+        txtLastName.setEditable(false);
+        txtNumber.setEditable(false);
+        txtAge.setEditable(false);
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnHome.setEnabled(false);
+        btnWork.setEnabled(false);
+    }
+
+    private void setEditMode() {
+        txtFirstName.setEditable(true);
+        txtLastName.setEditable(true);
+        txtNumber.setEditable(true);
+        txtAge.setEditable(true);
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnHome.setEnabled(true);
+        btnWork.setEnabled(true);
     }
     
     public void refreshAddress() {
         String[] homeAddress = person.getHomeAddress().toString().split("\n");
         String[] workAddress = person.getWorkAddress().toString().split("\n");
+        if (!person.getHomeAddress().isFinished()) {
+            homeAddress = new String[]{"", "", ""};
+        }
+        if (!person.getWorkAddress().isFinished()) {
+            workAddress = new String[]{"", "", ""};
+        }
+
         lblHome1.setText("- " + homeAddress[0]);
         lblHome2.setText("- " + homeAddress[1]);
         lblHome3.setText("- " + homeAddress[2]);
         lblWork1.setText("- " + workAddress[0]);
         lblWork2.setText("- " + workAddress[1]);
         lblWork3.setText("- " + workAddress[2]);
+    }
+
+    public void populateProfile() {
+        txtFirstName.setText(person.getFirstName());
+        txtLastName.setText(person.getLastName());
+        txtNumber.setText(person.getSocialSecurityNumber());
+        txtAge.setText(String.valueOf(person.getAge()));
+        refreshAddress();
     }
                  
     private javax.swing.JButton btnBack;
