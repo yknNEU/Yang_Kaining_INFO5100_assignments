@@ -49,7 +49,7 @@ public class PersonDirectory {
         if (result == null) {
             result = searchByWorkZipCode(info);
         }
-        return null;
+        return result;
     }
 
     private Person searchByFirstName(String firstName) {

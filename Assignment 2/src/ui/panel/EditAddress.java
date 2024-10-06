@@ -38,7 +38,7 @@ public class EditAddress extends javax.swing.JPanel {
         lblAddress3 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
-        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         lblTitle.setText("Edit Address");
 
         lblStreet.setText("Street Address");
@@ -97,20 +97,20 @@ public class EditAddress extends javax.swing.JPanel {
                                         .addComponent(txtZip, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                         .addComponent(txtStreet, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblStreet, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCity, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtCity, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addComponent(lblZip)
                                     .addComponent(lblPhone)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCity))
                                 .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblState)
                                     .addComponent(lblAddress1)
                                     .addComponent(lblAddress2)
                                     .addComponent(lblAddress3)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(lblNumber)
                                         .addComponent(txtNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                        .addComponent(lblState)
                                         .addComponent(txtState)
                                         .addComponent(lblAddress)))))))
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -130,7 +130,7 @@ public class EditAddress extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCity)
                     .addComponent(lblState))
@@ -138,7 +138,7 @@ public class EditAddress extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblZip)
                     .addComponent(lblAddress))
@@ -146,7 +146,7 @@ public class EditAddress extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPhone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,13 +156,13 @@ public class EditAddress extends javax.swing.JPanel {
                         .addComponent(lblAddress2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAddress3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }                        
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                
         container.remove(this);
         java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
         layout.previous(container);

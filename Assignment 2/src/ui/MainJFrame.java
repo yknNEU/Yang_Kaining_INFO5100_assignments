@@ -16,7 +16,7 @@ public class MainJFrame extends javax.swing.JFrame {
         generateDemoData();
         // ------------------------------------- //
         ProfileList profileList = new ProfileList(rightPanel, personDirectory);
-        rightPanel.add("ProfileList", profileList);
+        rightPanel.add("ProfileList" + profileList.toString(), profileList);
         java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
     }
@@ -107,7 +107,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {                                       
         rightPanel.removeAll();
         CreateProfile createProfile = new CreateProfile(rightPanel, personDirectory);
-        rightPanel.add("CreateProfile", createProfile);
+        rightPanel.add("CreateProfile" + createProfile.toString(), createProfile);
         java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
     }                                      
@@ -115,7 +115,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {                                        
         rightPanel.removeAll();
         ProfileList profileList = new ProfileList(rightPanel, personDirectory);
-        rightPanel.add("ProfileList", profileList);
+        rightPanel.add("ProfileList" + profileList.toString(), profileList);
         java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
     }                                       
@@ -131,7 +131,7 @@ public class MainJFrame extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Person not exist.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         } else {
             ViewProfile viewProfile = new ViewProfile(rightPanel, person);
-            rightPanel.add("ViewProfile", viewProfile);
+            rightPanel.add("ViewProfile" + viewProfile.toString(), viewProfile);
             java.awt.CardLayout layout = (java.awt.CardLayout) rightPanel.getLayout();
             layout.next(rightPanel);
         }

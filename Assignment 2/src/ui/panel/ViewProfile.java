@@ -42,7 +42,7 @@ public class ViewProfile extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); 
+        lblTitle.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         lblTitle.setText("View Profile");
 
         lblFirstName.setText("First Name");
@@ -109,47 +109,44 @@ public class ViewProfile extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(lblTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSave)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnBack)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblFirstName)
-                            .addComponent(txtFirstName)
-                            .addComponent(lblNumber)
-                            .addComponent(txtNumber)
-                            .addComponent(lblHome1)
-                            .addComponent(lblHome2)
-                            .addComponent(lblHome3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblHome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 57, Short.MAX_VALUE)))))
-                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnUpdate)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(149, 149, 149)
+                        .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSave)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnBack)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblFirstName)
+                                    .addComponent(txtFirstName)
+                                    .addComponent(lblNumber)
+                                    .addComponent(txtNumber)
+                                    .addComponent(lblHome1)
+                                    .addComponent(lblHome2)
+                                    .addComponent(lblHome3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblHome)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 57, Short.MAX_VALUE)))))
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblWork)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnWork, javax.swing.GroupLayout.PREFERRED_SIZE, 62, Short.MAX_VALUE))
+                            .addComponent(btnUpdate)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblWork)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnWork, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                 .addComponent(txtLastName)
                                 .addComponent(lblLastName)
                                 .addComponent(lblAge)
-                                .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                            .addComponent(lblWork1)
-                            .addComponent(lblWork2)
-                            .addComponent(lblWork3))
-                        .addContainerGap(40, Short.MAX_VALUE))))
+                                .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(lblWork1)
+                                .addComponent(lblWork2)
+                                .addComponent(lblWork3)))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +199,7 @@ public class ViewProfile extends javax.swing.JPanel {
         );
     }                   
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {                                  
         container.remove(this);
 
         java.awt.Component[] panelStack = container.getComponents();
@@ -228,14 +225,14 @@ public class ViewProfile extends javax.swing.JPanel {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
         EditAddress editAddress = new EditAddress(container, person.getHomeAddress());
-        container.add("EditAddress", editAddress);
+        container.add("EditAddress" + editAddress.toString(), editAddress);
         java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
         layout.next(container);
     }                                       
 
     private void btnWorkActionPerformed(java.awt.event.ActionEvent evt) {                                        
         EditAddress editAddress = new EditAddress(container, person.getWorkAddress());
-        container.add("EditAddress", editAddress);
+        container.add("EditAddress" + editAddress.toString(), editAddress);
         java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
         layout.next(container);
     }                                       

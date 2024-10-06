@@ -180,14 +180,14 @@ public class CreateProfile extends javax.swing.JPanel {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {                                        
         EditAddress editAddress = new EditAddress(container, person.getHomeAddress());
-        container.add("EditAddress", editAddress);
+        container.add("EditAddress" + editAddress.toString(), editAddress);
         java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
         layout.next(container);
     }                                       
 
     private void btnWorkActionPerformed(java.awt.event.ActionEvent evt) {                                        
         EditAddress editAddress = new EditAddress(container, person.getWorkAddress());
-        container.add("EditAddress", editAddress);
+        container.add("EditAddress" + editAddress.toString(), editAddress);
         java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
         layout.next(container);
     }                                       

@@ -121,7 +121,7 @@ public class ProfileList extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             Person person = (Person) tblProfile.getValueAt(selectedRow, 0);
             ViewProfile viewProfile = new ViewProfile(container, person);
-            container.add("ViewProfile", viewProfile);
+            container.add("ViewProfile" + viewProfile.toString(), viewProfile);
             java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
             layout.next(container);
         } else {
@@ -156,7 +156,7 @@ public class ProfileList extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(null, "Person not found. Please check the information and try again.", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         } else {
             ViewProfile viewProfile = new ViewProfile(container, person);
-            container.add("ViewProfile", viewProfile);
+            container.add("ViewProfile" + viewProfile.toString(), viewProfile);
             java.awt.CardLayout layout = (java.awt.CardLayout) container.getLayout();
             layout.next(container);
         }
