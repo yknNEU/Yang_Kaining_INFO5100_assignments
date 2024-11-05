@@ -47,16 +47,16 @@ public class Info5001UniversityExample {
             Course course8 = coursecatalog.newCourse("User Experience Design and Testing", "CSYE 7280", 4);
             Course course9 = coursecatalog.newCourse("Career Management for Engineers", "ENCP 6000", 1);
             // 10 students
-            Person student1 = department.getPersonDirectory().newPerson("Student 1");
-            Person student2 = department.getPersonDirectory().newPerson("Student 2");
-            Person student3 = department.getPersonDirectory().newPerson("Student 3");
-            Person student4 = department.getPersonDirectory().newPerson("Student 4");
-            Person student5 = department.getPersonDirectory().newPerson("Student 5");
-            Person student6 = department.getPersonDirectory().newPerson("Student 6");
-            Person student7 = department.getPersonDirectory().newPerson("Student 7");
-            Person student8 = department.getPersonDirectory().newPerson("Student 8");
-            Person student9 = department.getPersonDirectory().newPerson("Student 9");
-            Person student0 = department.getPersonDirectory().newPerson("Student 0");
+            Person student1 = department.getPersonDirectory().newPerson("Kaining Yang");
+            Person student2 = department.getPersonDirectory().newPerson("Zihao Liu");
+            Person student3 = department.getPersonDirectory().newPerson("Kalyan Satwik Adabala");
+            Person student4 = department.getPersonDirectory().newPerson("Renuka Alakunta");
+            Person student5 = department.getPersonDirectory().newPerson("Shreya Jaiswal");
+            Person student6 = department.getPersonDirectory().newPerson("Viswanath Raju Indukuri");
+            Person student7 = department.getPersonDirectory().newPerson("Uday Kiran Dasari");
+            Person student8 = department.getPersonDirectory().newPerson("Janvi Bharatkumar Chitroda");
+            Person student9 = department.getPersonDirectory().newPerson("Anurag Kashyap Vadapalli");
+            Person student0 = department.getPersonDirectory().newPerson("Neha Palanati");
             StudentProfile studentProfile1 = department.getStudentDirectory().newStudentProfile(student1);
             StudentProfile studentProfile2 = department.getStudentDirectory().newStudentProfile(student2);
             StudentProfile studentProfile3 = department.getStudentDirectory().newStudentProfile(student3);
@@ -139,14 +139,14 @@ public class Info5001UniversityExample {
             courseLoad0b.newSeatAssignment(courseoffer7);
             courseLoad0b.newSeatAssignment(courseoffer9);
             // 8 Professor assigned (each professor assigned to 1 or 2 classes)
-            Person professor1 = department.getPersonDirectory().newPerson("Professor 1");
-            Person professor2 = department.getPersonDirectory().newPerson("Professor 2");
-            Person professor3 = department.getPersonDirectory().newPerson("Professor 3");
-            Person professor4 = department.getPersonDirectory().newPerson("Professor 4");
-            Person professor5 = department.getPersonDirectory().newPerson("Professor 5");
-            Person professor6 = department.getPersonDirectory().newPerson("Professor 6");
-            Person professor7 = department.getPersonDirectory().newPerson("Professor 7");
-            Person professor8 = department.getPersonDirectory().newPerson("Professor 8");
+            Person professor1 = department.getPersonDirectory().newPerson("Khaled Bugrara");
+            Person professor2 = department.getPersonDirectory().newPerson("Akash Murthy");
+            Person professor3 = department.getPersonDirectory().newPerson("Jayshil Jain");
+            Person professor4 = department.getPersonDirectory().newPerson("Sai Kale");
+            Person professor5 = department.getPersonDirectory().newPerson("Ariana Brody");
+            Person professor6 = department.getPersonDirectory().newPerson("Molly Xue");
+            Person professor7 = department.getPersonDirectory().newPerson("Jasmine Taylor");
+            Person professor8 = department.getPersonDirectory().newPerson("Marie East");
             FacultyProfile facultyProfile1 = department.facultydirectory.newFacultyProfile(professor1);
             FacultyProfile facultyProfile2 = department.facultydirectory.newFacultyProfile(professor2);
             FacultyProfile facultyProfile3 = department.facultydirectory.newFacultyProfile(professor3);
@@ -156,12 +156,12 @@ public class Info5001UniversityExample {
             FacultyProfile facultyProfile7 = department.facultydirectory.newFacultyProfile(professor7);
             FacultyProfile facultyProfile8 = department.facultydirectory.newFacultyProfile(professor8);
             facultyProfile1.AssignAsTeacher(courseoffer1);
+            facultyProfile1.AssignAsTeacher(courseoffer0);
             facultyProfile2.AssignAsTeacher(courseoffer2);
-            facultyProfile2.AssignAsTeacher(courseoffer0);
             facultyProfile3.AssignAsTeacher(courseoffer3);
+            facultyProfile3.AssignAsTeacher(courseoffer9);
             facultyProfile4.AssignAsTeacher(courseoffer4);
             facultyProfile5.AssignAsTeacher(courseoffer5);
-            facultyProfile5.AssignAsTeacher(courseoffer9);
             facultyProfile6.AssignAsTeacher(courseoffer6);
             facultyProfile7.AssignAsTeacher(courseoffer7);
             facultyProfile8.AssignAsTeacher(courseoffer8);
@@ -184,19 +184,19 @@ public class Info5001UniversityExample {
          * \t\tCourse: ...
          * \tStudent: ...
          */
-        System.out.println("Department: " + department.name);
+        System.out.println("\033[38;2;193;156;0mDepartment\033[38;2;136;23;152m: \033[38;2;231;72;86m" + department.name);
         for (Course course : department.coursecatalog.courselist) {
-            System.out.println("\tCourse: " + course.getCourseNumber() + " - " + course.name + " (Credits: " + course.getCredits() + ")");
+            System.out.println("\t\033[38;2;193;156;0mCourse\033[38;2;136;23;152m: \033[38;2;22;198;12m" + course.getCourseNumber() + " \033[38;2;136;23;152m- \033[38;2;19;161;14m" + course.name + " \033[38;2;136;23;152m(\033[38;2;193;156;0mCredits: \033[38;2;97;214;214m" + course.getCredits() + "\033[38;2;136;23;152m)");
             for (String semister : department.mastercoursecatalog.keySet()) {
                 CourseOffer courseoffer = department.mastercoursecatalog.get(semister).getCourseOfferByNumber(course.getCourseNumber());
                 if (courseoffer != null) {
-                    System.out.println("\t\tCourse Offered by: " + courseoffer.facultyassignment.facultyprofile.person.id + ", " + semister);
+                    System.out.println("\t\t\033[38;2;193;156;0mCourse Offered by\033[38;2;136;23;152m: \033[38;2;242;242;242m" + courseoffer.facultyassignment.facultyprofile.person.id + "\033[38;2;136;23;152m, \033[38;2;54;120;255m" + semister);
                     for (StudentProfile studentProfile : department.studentdirectory.studentlist) {
                         CourseLoad courseload = studentProfile.transcript.getCourseLoadBySemester(semister);
                         if (courseload != null) {
                             for (SeatAssignment seatAssignment : courseload.seatassignments) {
                                 if (seatAssignment.getAssociatedCourse().getCourseNumber().equals(course.getCourseNumber())) {
-                                    System.out.println("\t\t\tStudent: " + studentProfile.person.id + "  Seat: " + seatAssignment.getSeat().number);
+                                    System.out.println("\t\t\t\033[38;2;193;156;0mStudent\033[38;2;136;23;152m: \033[38;2;118;118;118m" + studentProfile.person.id + "  \033[38;2;193;156;0mSeat\033[38;2;136;23;152m: \033[38;2;97;214;214m" + seatAssignment.getSeat().number);
                                 }
                             }
                         }
@@ -204,9 +204,9 @@ public class Info5001UniversityExample {
                 }
             }
         }
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("\033[38;2;249;241;165m-----------------------------------------------------------------------------");
         for (String semister : department.mastercoursecatalog.keySet()) {
-            System.out.println("Semister: " + semister);
+            System.out.println("\033[38;2;193;156;0mSemister\033[38;2;136;23;152m: \033[38;2;54;120;255m" + semister);
             for (StudentProfile studentProfile : department.studentdirectory.studentlist) {
                 float totalGrade = 0;
                 int totalCredits = 0;
@@ -219,14 +219,15 @@ public class Info5001UniversityExample {
                         totalTuition += seatAssignment.getAssociatedCourse().getCoursePrice();
                     }
                 }
-                System.out.println("\tStudent: " + studentProfile.person.id + ", Average GPA: " + totalGrade / totalCredits + ", Paid: " + totalTuition);
+                System.out.println("\t\033[38;2;193;156;0mStudent\033[38;2;136;23;152m: \033[38;2;118;118;118m" + studentProfile.person.id + "\033[38;2;136;23;152m, \033[38;2;193;156;0mAverage GPA\033[38;2;136;23;152m: \033[38;2;97;214;214m" + totalGrade / totalCredits + "\033[38;2;136;23;152m, \033[38;2;193;156;0mPaid\033[38;2;136;23;152m: \033[38;2;97;214;214m$" + totalTuition);
                 if (courseload != null) {
                     for (SeatAssignment seatAssignment : courseload.seatassignments) {
                         Course course = seatAssignment.getAssociatedCourse();
-                        System.out.println("\t\tCourse: " + course.getCourseNumber() + " - " + course.name + " (Credits: " + course.getCredits() + "): Grade: " + seatAssignment.grade + ", Professor: " + seatAssignment.getCourseOffer().facultyassignment.facultyprofile.person.id);
+                        System.out.println("\t\t\033[38;2;193;156;0mCourse\033[38;2;136;23;152m: \033[38;2;22;198;12m" + course.getCourseNumber() + " \033[38;2;136;23;152m- \033[38;2;19;161;14m" + course.name + " \033[38;2;136;23;152m(\033[38;2;193;156;0mCredits\033[38;2;136;23;152m: \033[38;2;97;214;214m" + course.getCredits() + "\033[38;2;136;23;152m): \033[38;2;193;156;0mGrade\033[38;2;136;23;152m: \033[38;2;97;214;214m" + seatAssignment.grade + "\033[38;2;136;23;152m, \033[38;2;193;156;0mProfessor\033[38;2;136;23;152m: \033[38;2;242;242;242m" + seatAssignment.getCourseOffer().facultyassignment.facultyprofile.person.id);
                     }
                 }
             }
         }
+        System.out.println("\033[0m");
     }
 }
