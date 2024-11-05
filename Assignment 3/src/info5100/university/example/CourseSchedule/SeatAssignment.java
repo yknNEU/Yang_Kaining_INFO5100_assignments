@@ -49,4 +49,26 @@ public class SeatAssignment {
     public float GetCourseStudentScore() {
         return getCreditHours() * grade;
     }
+
+    public String getLetterGrade() {
+        if (grade >= 3.95) {
+            return "A";
+        } else if (grade >= 3.65) {
+            return "A-";
+        } else if (grade >= 3.25) {
+            return "B+";
+        } else if (grade >= 2.95) {
+            return "B";
+        } else if (grade >= 2.65) {
+            return "B-";
+        } else if (grade >= 2.25) {
+            return "C+";
+        } else if (grade >= 1.95) {
+            return "C";
+        } else if (grade >= 1.65) {
+            return "C-";
+        } else {
+            return "F";
+        }
+    }
 }

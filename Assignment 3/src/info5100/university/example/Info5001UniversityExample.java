@@ -46,6 +46,15 @@ public class Info5001UniversityExample {
             Course course7 = coursecatalog.newCourse("Concepts of Object-Oriented Design", "CSYE 6200", 4);
             Course course8 = coursecatalog.newCourse("User Experience Design and Testing", "CSYE 7280", 4);
             Course course9 = coursecatalog.newCourse("Career Management for Engineers", "ENCP 6000", 1);
+            department.addCoreCourse(course1);
+            department.addElectiveCourse(course2);
+            department.addElectiveCourse(course3);
+            department.addElectiveCourse(course4);
+            department.addElectiveCourse(course5);
+            department.addElectiveCourse(course6);
+            department.addElectiveCourse(course7);
+            department.addElectiveCourse(course8);
+            department.addElectiveCourse(course9);
             // 10 students
             Person student1 = department.getPersonDirectory().newPerson("Kaining Yang");
             Person student2 = department.getPersonDirectory().newPerson("Zihao Liu");
@@ -186,7 +195,11 @@ public class Info5001UniversityExample {
          */
         System.out.println("\033[38;2;193;156;0mDepartment\033[38;2;136;23;152m: \033[38;2;231;72;86m" + department.name);
         for (Course course : department.coursecatalog.courselist) {
-            System.out.println("\t\033[38;2;193;156;0mCourse\033[38;2;136;23;152m: \033[38;2;22;198;12m" + course.getCourseNumber() + " \033[38;2;136;23;152m- \033[38;2;19;161;14m" + course.name + " \033[38;2;136;23;152m(\033[38;2;193;156;0mCredits: \033[38;2;97;214;214m" + course.getCredits() + "\033[38;2;136;23;152m)");
+            String courseType = "Elective";
+            if (department.degree.corelist.contains(course)) {
+                courseType = "Core";
+            }
+            System.out.println("\t\033[38;2;193;156;0mCourse\033[38;2;136;23;152m: \033[38;2;22;198;12m" + course.getCourseNumber() + " \033[38;2;136;23;152m- \033[38;2;19;161;14m" + course.name + " \033[38;2;136;23;152m(\033[38;2;197;15;31m" + courseType + " Course\033[38;2;136;23;152m, \033[38;2;193;156;0mCredits: \033[38;2;97;214;214m" + course.getCredits() + "\033[38;2;136;23;152m)");
             for (String semister : department.mastercoursecatalog.keySet()) {
                 CourseOffer courseoffer = department.mastercoursecatalog.get(semister).getCourseOfferByNumber(course.getCourseNumber());
                 if (courseoffer != null) {
@@ -223,7 +236,11 @@ public class Info5001UniversityExample {
                 if (courseload != null) {
                     for (SeatAssignment seatAssignment : courseload.seatassignments) {
                         Course course = seatAssignment.getAssociatedCourse();
-                        System.out.println("\t\t\033[38;2;193;156;0mCourse\033[38;2;136;23;152m: \033[38;2;22;198;12m" + course.getCourseNumber() + " \033[38;2;136;23;152m- \033[38;2;19;161;14m" + course.name + " \033[38;2;136;23;152m(\033[38;2;193;156;0mCredits\033[38;2;136;23;152m: \033[38;2;97;214;214m" + course.getCredits() + "\033[38;2;136;23;152m): \033[38;2;193;156;0mGrade\033[38;2;136;23;152m: \033[38;2;97;214;214m" + seatAssignment.grade + "\033[38;2;136;23;152m, \033[38;2;193;156;0mProfessor\033[38;2;136;23;152m: \033[38;2;242;242;242m" + seatAssignment.getCourseOffer().facultyassignment.facultyprofile.person.id);
+                        String courseType = "Elective";
+                        if (department.degree.corelist.contains(course)) {
+                            courseType = "Core";
+                        }
+                        System.out.println("\t\t\033[38;2;193;156;0mCourse\033[38;2;136;23;152m: \033[38;2;22;198;12m" + course.getCourseNumber() + " \033[38;2;136;23;152m- \033[38;2;19;161;14m" + course.name + " \033[38;2;136;23;152m(\033[38;2;197;15;31m" + courseType + " Course\033[38;2;136;23;152m, \033[38;2;193;156;0mCredits\033[38;2;136;23;152m: \033[38;2;97;214;214m" + course.getCredits() + "\033[38;2;136;23;152m): \033[38;2;193;156;0mGrade\033[38;2;136;23;152m: \033[38;2;97;214;214m" + seatAssignment.grade + "\033[38;2;136;23;152m - \033[38;2;97;214;214m" + seatAssignment.getLetterGrade() + "\033[38;2;136;23;152m, \033[38;2;193;156;0mProfessor\033[38;2;136;23;152m: \033[38;2;242;242;242m" + seatAssignment.getCourseOffer().facultyassignment.facultyprofile.person.id);
                     }
                 }
             }
